@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function App() {
   const [tech, setTech] = useState(['ReactJS', 'React Native']);
@@ -8,6 +8,20 @@ function App() {
     setTech([...tech, newTech]);
     setNewTech('');
   }
+
+  // ComponentDidAmount
+  useEffect(() => {
+    const storageTech = localStorage.getItem('tech');
+
+    if (storageTech) {
+      setTech(JSON.parse(storageTech));
+    }
+  }, []);
+
+  // ComponentDidUpdate
+  useEffect(() => {
+    localStorage.setItem('tech', JSON.stringify(tech));
+  }, [tech]);
 
   return (
     <>
